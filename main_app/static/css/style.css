@@ -1,11 +1,8 @@
-body {
-    background-color: gray;
-  }
-
-  body {
+ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background-color: rgb(203, 203, 203);
   }
   
   main {
