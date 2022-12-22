@@ -1,23 +1,32 @@
 {% extends 'base.html' %}
-{% block content %}
 
-<h1>Lion's Den</h1>
+
+{% block content %}
+<h1>Lion List</h1>
+
 
 {% for lion in lions %}
-  <div class="card">
-    <a href="/lions/{{ lion.id }}">
-    <div class="card-content">
-      <span class="card-title">{{ lion.name }}</span>
-      <p>Breed: {{ lion.breed }}</p>
-      <p>Description: {{ lion.description }}</p>
-      {% if lion.age > 0 %}
-        <p>Age: {{ lion.age }}</p>
-      {% else %}
-        <p>Age: Cub</p>
-      {% endif %}
-    </div>
-    </a>    
-  </div>
+<div class="card">
+	<a href="{% url 'detail' lion.id %}">
+		<div class="card-content">
+			<span class="card-title">{{ lion.name }}</span>
+			<p>Breed: {{ lion.breed }}</p>
+			<p>Description: {{ lion.description }}</p>
+
+			{% if lion.age > 0 %}
+			<p>Age: {{ lion.age }}</p>
+
+			{% else %}
+			<p>Age: Cub</p>
+
+			{% endif %}
+
+		</div>
+	</a>
+</div>
 {% endfor %}
 
-{% endblock %}
+
+
+
+{% endblock content %}

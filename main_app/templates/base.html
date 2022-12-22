@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,18 +7,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Lion Collector</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  
 </head>
 <body>
   <header class="navbar-fixed">
     <nav>
-      <div class="nav-wrapper #ffd54f amber lighten-2">
+      <div class="nav-wrapper #ffc400 amber accent-3">
         <ul>
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;LionCollector</a></li>
+		  
         </ul>
         <ul class="right">
-            <li><a href="/lions">View All My Lions</a></li>
+            <li><a href="{% url 'lions_create' %}">Lions create</a></li>
+		  <li><a href="/lions">View All My Lions</a></li>
           <li><a href="/about">About</a></li>
         </ul>
       </div>
@@ -29,8 +30,9 @@
     {% block content %}
     {% endblock %}
   </main>
-  <footer class="page-footer #ffd54f amber lighten-2">
+  <footer class="page-footer #ffc400 amber accent-3">
     <div class="right">All Rights Reserved, &copy; 2019 Lion Collector &nbsp;</div>
   </footer>
 </body>
 </html>
+
