@@ -1,10 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 #import the clbv
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # Create your views here.
 from django.http import HttpResponse
 from .models import Lion
+from .forms import FeedingForm
+
+def add_feeding(request, lion_id):
+    form = FeedingForm(request.POST)
+    if form.is_valid(): 
+        new_feeding = form.save(commit=False)
+        new_feeding.lion_id = lion_id
+        new_feeding.save()
+    return redirect('detail', lion_id=lion_id)
 
 
 
@@ -43,5 +52,7 @@ def lions_index(request):
 def lions_detail(request, lion_id):
 
   lion = Lion.objects.get(id=lion_id)
+
+  feeding_form = FeedingForm()
   
-  return render(request, 'lions/detail.html', {'lion': lion})
+  return render(request, 'lions/detail.html', {'lion': lion,'feeding_form': feeding_form})
