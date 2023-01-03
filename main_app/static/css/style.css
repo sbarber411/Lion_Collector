@@ -2,8 +2,9 @@
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-color: rgb(203, 203, 203);
-  }
+    background-color: rgb(147, 117, 77);
+    color: white;
+ }
   
   main {
     flex: 1 0 auto;
@@ -13,6 +14,11 @@
     padding-top: 0;
     text-align: right;
   }
+
+.card-content{
+    background-color: transparent;
+color: black;
+}
 
 
   

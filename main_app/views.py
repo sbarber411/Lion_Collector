@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 
 #import the clbv
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 # Create your views here.
 from django.http import HttpResponse
-from .models import Lion
+from .models import Lion, Toy
 from .forms import FeedingForm
 
 def add_feeding(request, lion_id):
@@ -32,7 +33,7 @@ class LionDelete(DeleteView):
 class LionCreate(CreateView):
     model = Lion
 
-    fields = '__all__' 
+    fields = ['name', 'breed', 'description', 'age']
 
 
 
@@ -52,7 +53,30 @@ def lions_index(request):
 def lions_detail(request, lion_id):
 
   lion = Lion.objects.get(id=lion_id)
-
+  toys_lion_doesnt_have = Toy.objects.exclude(id__in = lion.toys.all().values_list('id'))
   feeding_form = FeedingForm()
   
-  return render(request, 'lions/detail.html', {'lion': lion,'feeding_form': feeding_form})
+  return render(request, 'lions/detail.html', {'lion': lion,'feeding_form': feeding_form, 'toys': toys_lion_doesnt_have})
+
+class ToyList(ListView):
+  model = Toy
+
+class ToyDetail(DetailView):
+  model = Toy
+
+class ToyCreate(CreateView):
+  model = Toy
+  fields = '__all__'
+
+class ToyUpdate(UpdateView):
+  model = Toy
+  fields = ['name', 'color']
+
+class ToyDelete(DeleteView):
+  model = Toy
+  success_url = '/toys/'
+
+def assoc_toy(request, lion_id, toy_id):
+  # Note that you can pass a toy's id instead of the whole object
+  Lion.objects.get(id=lion_id).toys.add(toy_id)
+  return redirect('detail', lion_id=lion_id)
